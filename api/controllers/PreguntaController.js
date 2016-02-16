@@ -25,6 +25,18 @@ module.exports = {
 			resultado = 'Correcto';
 		}
 		res.json(resultado);
-	} 
+	},
+
+	findOne: function(req, res, next) {
+		Pregunta.findOne({
+			where: { id: Number(req.params.Id)}
+		}).then(function(pregunta){
+			if(pregunta) {
+				req.pregunta = pregunta;
+				res.json();
+				next();
+			} else { next(new Error('No existe la pregunta con el id' + req.params.preguntaId));}
+		}).catch(function(error){next(error);});
+	}
 };
 
