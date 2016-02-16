@@ -16,7 +16,7 @@ module.exports = {
       pregunta:{
 		model:'Pregunta'
 	},
-	subopciones: {
+	   subopciones: {
         collection:'subopcion',
         via:'opcion'
     }

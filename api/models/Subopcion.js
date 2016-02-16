@@ -17,7 +17,7 @@ module.exports = {
     valor : { type: 'string', 
     size:255
 	},
-    opcion:{
+    opcion :{
 		model:'Opcion'
 	}
   }
