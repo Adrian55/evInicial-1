@@ -8,8 +8,15 @@
 module.exports = {
 
   attributes: {
+   nombre : { 
+      type: 'string',
+      size:50 
+    },
 
-    observaciones : { type: 'string' },
+    observaciones : { 
+      type: 'string',
+      size:255 
+    },
 
     fechaFin : { type: 'date' },
 
@@ -21,6 +28,10 @@ module.exports = {
     alumnos : {
     	collection : 'alumno',
     	via : 'cuestionarios'
+    },
+   respuestas : {
+      collection : 'respuesta',
+      via : 'cuestionario'
     },
 
     duplicar: function (cb) {

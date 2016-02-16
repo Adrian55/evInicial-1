@@ -11,15 +11,15 @@ module.exports = {
 
     dni : { type: 'string', size: 10 },
 
-    apellido1 : { type: 'string', size: 30 },
+    apellido1 : { type: 'string', size: 45 },
 
-    apellido2 : { type: 'string', size: 30 },
+    apellido2 : { type: 'string', size: 45 },
 
-    nombre : { type: 'string', size: 30, required: true },
+    nombre : { type: 'string', size: 45, required: true },
 
     fechaNac : { type: 'date' },
 
-    email : { type: 'string', email: true, unique: true, required: true},
+    email : { type: 'string',size:45 ,email: true, unique: true, required: true},
 
     user: {
         model: 'user'
@@ -33,8 +33,10 @@ module.exports = {
     cuestionarios : {
     	collection : 'cuestionario',
     	via : 'alumnos'
+    },
+    respuestas: {
+        collection:'respuesta',
+        via:'alumno'
     }
-
   }
 };
-
