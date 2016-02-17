@@ -27,16 +27,14 @@ module.exports = {
 		res.json(resultado);
 	},
 
-	findOne: function(req, res, next) {
+	findOne: function(req, res) {
 		Pregunta.findOne({
 			where: { id: Number(req.params.Id)}
 		}).then(function(pregunta){
 			if(pregunta) {
-				req.pregunta = pregunta;
-				res.json();
-				next();
-			} else { next(new Error('No existe la pregunta con el id' + req.params.preguntaId));}
+				req.opciones = pregunta;
+				res.json(opciones);
+			} else { next(new Error('No existe el id' + req.params.Id));}
 		}).catch(function(error){next(error);});
 	}
 };
-
