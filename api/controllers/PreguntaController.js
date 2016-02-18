@@ -29,12 +29,16 @@ module.exports = {
 
 	findOne: function(req, res) {
 		Pregunta.findOne({
-			where: { id: Number(req.params.Id)}
+			where: { id: Number(req.params.id)}
 		}).then(function(pregunta){
 			if(pregunta) {
-				req.opciones = pregunta;
-				res.json(opciones);
-			} else { next(new Error('No existe el id' + req.params.Id));}
+				preguntaJSON = pregunta.toJSON();
+		Opcion.find({
+			pregunta:(req.params.id)
+		}).populate('subopciones').then(function(opcion){
+			if(opcion) {
+				preguntaJSON.opcion = opcion;
+			} else { next(new Error('No existe la pregunta con el id' + req.params.preguntaId));}
 		}).catch(function(error){next(error);});
 	}
 };

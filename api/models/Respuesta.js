@@ -13,8 +13,6 @@ module.exports = {
     	type: 'string',
     	size:255
     },
-
-
     puntuacion : { 
     	type: 'integer' 
     },
