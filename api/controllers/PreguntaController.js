@@ -33,12 +33,15 @@ module.exports = {
 		}).then(function(pregunta){
 			if(pregunta) {
 				preguntaJSON = pregunta.toJSON();
+				} else { next(new Error('No existe la pregunta con el id' + req.params.preguntaId));}
+		}).catch(function(error){next(error);});
 		Opcion.find({
-			pregunta:(req.params.id)
+			pregunta:req.params.id
 		}).populate('subopciones').then(function(opcion){
 			if(opcion) {
-				preguntaJSON.opcion = opcion;
-			} else { next(new Error('No existe la pregunta con el id' + req.params.preguntaId));}
+				preguntaJSON.opciones = opcion;
+				res.json(preguntaJSON);
+			} else { next(new Error('No existen las opciones con el id' + req.params.opcionId));}
 		}).catch(function(error){next(error);});
 	}
 };
