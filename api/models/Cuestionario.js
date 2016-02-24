@@ -59,6 +59,35 @@ module.exports = {
     }
   },
 
+aJSON: function(cb) {
+
+        //Recogemos los Ids de preguntas del cuestionario en un array
+        var preguntasIds = [];
+        this.preguntas.forEach(function(pregunta){
+          preguntasIds.push(pregunta.id)
+        });
+
+        //Buscamos las opciones correspondientes a las preguntas anteriores
+        Opcion.find().where({ pregunta: preguntasIds }) // WHERE pregunta IN (preguntasIds)
+            .populate('subopciones')
+            .then(function(opciones){
+
+              var cuestionario = this.toJSON();
+              for (var i = 0; i < cuestionario.preguntas.length; ++i) {
+                cuestionario.preguntas[i].opciones = [];
+                  for (var j = 0; j < opciones.length; ++j){
+                    if(Number(opciones[j].pregunta) === Number(cuestionario.preguntas[i].id)) {
+                      opcion = opciones[j].toJSON();
+//                      delete opcion.pregunta;
+                      cuestionario.preguntas[i].opciones.push(opcion);
+                    }
+                  }
+                }
+              cb(cuestionario);
+            }.bind(this)) // Importante para poder utilizar this dentro de la promesa
+            .catch(function(error){});
+    },
+
   duplicar: function (cuestionario, cb) {
 
   // Before doing anything else, check if a primary key value
