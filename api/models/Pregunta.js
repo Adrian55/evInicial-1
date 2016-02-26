@@ -29,7 +29,8 @@ module.exports = {
         via:'pregunta'
     }
   },
-  aJSON: function(cb) {
+
+  crearRespuesta: function(cb) {
         switch(this.tipo) {
           case 'essay':
               return this.essayToJSON();
@@ -53,30 +54,10 @@ module.exports = {
               break;
         }      
     },
+
     
-    essayToJSON: function(cb) {
-        var PreguntaJSON = this.toJSON();
-        return Opcion.find().where({ pregunta: this.id })
-        .populate('subopciones');
-    },
 
-    matchingToJSON: function(cb) {
-        
-    },
-
-    multichoiceToJSON: function(cb) {
-
-    },
-
-    numericalToJSON: function(cb) {
-
-    },
-
-    shortanswerToJSON: function(cb) {
-
-    },
-
-    truefalseToJSON: function(cb) {
+    puntuarRespuesta: function() {
 
     }
 

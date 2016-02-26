@@ -19,12 +19,7 @@ module.exports = {
 	},
 
 	corregirRespuesta: function(req, res) {
-		var respuestaVal = (req.query.respuesta) ? req.query.respuesta : undefined,
-			resultado = 'Incorrecto';
-		if(req.pregunta.respuesta == respuestaVal) {
-			resultado = 'Correcto';
-		}
-		res.json(resultado);
+		
 	},
 
 	findOne: function(req, res) {

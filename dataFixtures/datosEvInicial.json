@@ -1,23 +1,4 @@
 [
-  {
-    "model":"pregunta",
-    "items":[
-    {
-        "pregunta": "Capital de España",
-        "respuesta": "Madrid",
-        "id": 1
-    },
-    {
-        "pregunta": "Capital de Francia",
-        "respuesta": "Paris",
-        "id": 2
-    },
-    {
-        "pregunta": "Capital de Italia",
-        "respuesta": "Roma",
-        "id": 3
-    },
-
 {
     "createdBy": 14,
     "owner": 14,
@@ -79,15 +60,58 @@
       {
           "preguntas": [
               {
-                  "pregunta": "Capital de Francia",
-                  "respuesta": "Paris",
-                  "id": 2
-              },
-              {
-                  "pregunta": "Capital de Italia",
-                  "respuesta": "Roma",
-                  "id": 3
-              }
+    "createdBy": 14,
+    "owner": 14,
+    "enunciado": "ensayo enunciado",
+    "tipo": "essay",
+    "createdAt": "2016-02-19T01:22:25.548Z",
+    "updatedAt": "2016-02-19T01:29:09.410Z",
+    "id": 12,
+    "opciones": [
+        {
+            "subopciones": [
+                {
+                    "nombre": "responserequired",
+                    "valor": "one",
+                    "createdBy": 14,
+                    "owner": 14,
+                    "createdAt": "2016-02-19T01:29:42.501Z",
+                    "updatedAt": "2016-02-19T01:29:42.536Z",
+                    "id": 4,
+                    "opcion": 13
+                }
+            ],
+            "pregunta": 12,
+            "createdBy": 14,
+            "owner": 14,
+            "tipoOpcion": "responserequired",
+            "createdAt": "2016-02-19T01:24:01.916Z",
+            "updatedAt": "2016-02-19T01:29:42.519Z",
+            "id": 13
+        },
+        {
+            "subopciones": [
+                {
+                    "nombre": "responsefieldlines",
+                    "valor": "fifteen",
+                    "createdBy": 14,
+                    "owner": 14,
+                    "createdAt": "2016-02-19T01:30:09.029Z",
+                    "updatedAt": "2016-02-19T01:30:09.059Z",
+                    "id": 5,
+                    "opcion": 14
+                }
+            ],
+            "pregunta": 12,
+            "createdBy": 14,
+            "owner": 14,
+            "tipoOpcion": "responsefieldlines",
+            "createdAt": "2016-02-19T01:24:24.048Z",
+            "updatedAt": "2016-02-19T01:30:09.046Z",
+            "id": 14
+        }
+    ]
+}
           ],
           "alumnos": [],
           "observaciones": "Evaluación Inicial",
@@ -197,7 +221,7 @@
           "apellido1": "alumno4ap1",
           "apellido2": "alumno4ap2",
           "nombre": "alumno4nombre",
-          "email": "alumno@alu.murciaeduca.es",
+          "email": "6379487@alu.murciaeduca.es",
           "fechaNac": "2000-01-04T00:00:00.000Z",
           "id": 5
       }

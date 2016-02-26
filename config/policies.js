@@ -72,7 +72,7 @@ module.exports.policies = {
   },
 
   RespuestaController: {
-    'respuesta': ['sessionAuth','isAlumno']
+    'almacenaRespuesta': ['sessionAuth','isAlumno']
   }
 
 };
