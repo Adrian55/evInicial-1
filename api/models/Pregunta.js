@@ -59,8 +59,6 @@ module.exports = {
       Incremento = 0;
       Puntos = 0;
 
-      // Cliente envia ID de la 'subquestion' y el ID de la subopcion 'answer'.
-
       Opcion.find().where({ pregunta: this.id, tipoOpcion: 'subquestion' }).populate('subopciones')
         .then(function(opciones){
             
@@ -85,49 +83,63 @@ module.exports = {
         });
     },
 
-    corregirMultichoice: function(respuestaCompleta, cb) { 
+
+    corregirMultichoice: function(respuestaCompleta, cb) {
       Answered = respuestaCompleta.answered;
-              
-          Subopcion.findOne({
-              where: { id: Number(Answered), nombre="fraction"}
-          }).then(function(subopcion){
-            var Puntos=subopcion.valor;
-            Subopcion.findOne({
-              where:{opcion.:Number(Answered), nombre: "text"}
+
+      Subopcion.findOne({
+                where: {opcion: Number(Answered), nombre: "fraccion"}
             }).then(function(subopcion){
-            respuestaCompleta.answered=subopcion.valor;
-            cb(respuestaCompleta, Puntos);
+                var Puntos = subopcion.valor;
+                Subopcion.findOne({
+                    where: {opcion: Number(Answered), nombre: "text"}
+                }).then(function(subopcion){
+                    respuestaCompleta.answered = subopcion.valor;
+          cb(respuestaCompleta, Puntos);
+                })  
             })
-           }) 
+    },
+
 
     corregirNumerical: function(respuestaCompleta, cb) { 
       Answered = respuestaCompleta.answered;
-              
-          Subopcion.findOne({
-              where: { id: Number(Answered), nombre="fraction"}
-          }).then(function(subopcion){
-            var Puntos=subopcion.valor;
-            Subopcion.findOne({
-              where:{opcion.:Number(Answered), nombre: "text"}
-            }).then(function(subopcion){
-            respuestaCompleta.answered=subopcion.valor;
-            cb(respuestaCompleta, Puntos);
-            })
-           }) 
-
-    corregirTruefalse: function(respuestaCompleta, cb) { 
-    var puntuacion;
-    var texto;
+      Puntos = 0;
 
             Opcion.findOne({
                 where: { id: Number(respuesta)}
-                }).populate('subopcions').then(function(misOpciones){
+                }).populate('subopciones').then(function(misOpciones){
 
-                misOpciones.subopcions.forEach(function(subopcion){
+                misOpciones.subopciones.forEach(function(subopcion){
                     
                     sails.log.verbose(subopcion);
 
-                    if(subopcion.nombre === 'fraccion'){
+                    if(subopcion.nombre === 'fraction'){
+                        puntuacion = subopcion.valor;
+                    }
+
+                    if(subopcion.nombre === 'text'){
+                        texto = subopcion.valor;
+                    }
+                
+                });
+
+                cb(puntuacion, texto);
+            });
+        },
+
+    corregirTruefalse: function(respuestaCompleta, cb) { 
+    Answered = respuestaCompleta.answered;
+    Puntos = 0;
+
+            Opcion.findOne({
+                where: { id: Number(respuesta)}
+                }).populate('subopciones').then(function(misOpciones){
+
+                misOpciones.subopciones.forEach(function(subopcion){
+                    
+                    sails.log.verbose(subopcion);
+
+                    if(subopcion.nombre === 'fraction'){
                         puntuacion = subopcion.valor;
                     }
 
@@ -140,6 +152,4 @@ module.exports = {
                 cb(puntuacion, texto);
             });
         }
-
 };
-
