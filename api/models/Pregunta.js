@@ -54,9 +54,6 @@ module.exports = {
               break;
         }      
     },
-
-    
-
     puntuarRespuesta: function() {
 
     }

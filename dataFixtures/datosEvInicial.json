@@ -1,4 +1,23 @@
 [
+  {
+    "model":"pregunta",
+    "items":[
+    {
+        "pregunta": "Capital de España",
+        "respuesta": "Madrid",
+        "id": 1
+    },
+    {
+        "pregunta": "Capital de Francia",
+        "respuesta": "Paris",
+        "id": 2
+    },
+    {
+        "pregunta": "Capital de Italia",
+        "respuesta": "Roma",
+        "id": 3
+    },
+
 {
     "createdBy": 14,
     "owner": 14,
