@@ -46,5 +46,13 @@ module.exports = {
 				res.json(cuestionarioJSON);
 			});			
 		});
-	}
+	},
+	
+	siguiente: function(req, res){
+	  Pregunta.findOne({
+	    where: {id: {'>': req.params.preguntaId}}
+	  }).then(function(pregunta){
+	   res.json(pregunta);
+	  });
+}
 };

@@ -18,8 +18,17 @@ module.exports = {
 		}).catch(function(error){next(error);});
 	},
 
-	corregirRespuesta: function(req, res) {
-		
+	corregir: function(req, res, next) {
+		var respuestaCompleta = {
+									answered: req.body.answered, 
+									cuestionario: req.cuestionario, 
+									pregunta: req.pregunta,
+									usuario: req.session.passport.user
+								}
+console.log(req.pregunta);
+		req.pregunta.corregirRespuesta(res,respuestaCompleta, function(preguntaCorregida) {
+				res.json(preguntaCorregida);
+			});
 	},
 
 	findOne: function(req, res) {

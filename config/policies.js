@@ -66,13 +66,9 @@ module.exports.policies = {
    CuestionarioController: {
     'load': ['sessionAuth','isAlumno']
   },
-
   PreguntaController: {
-    'load': ['sessionAuth','isAlumno']
-  },
-
-  RespuestaController: {
-    'almacenaRespuesta': ['sessionAuth','isAlumno']
+    'load': ['sessionAuth','isAlumno'],
+    'corregir': ['sessionAuth','isAlumno']
   }
 
 };

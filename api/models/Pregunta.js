@@ -27,26 +27,25 @@ module.exports = {
     opciones: {
         collection:'opcion',
         via:'pregunta'
-    }
-  },
+    },
 
- corregir: function(respuestaCompleta, cb) {
+ corregirRespuesta: function(res, respuestaCompleta, cb) {
       var This = this;
       switch(This.tipo) {
         case 'essay':
-          This.almacenaRespuesta(respuestaCompleta, null, function(Puntos) { cb(Puntos); });
+          This.almacenaRespuesta(res, respuestaCompleta, null, function(Puntos) { cb(Puntos); });
           break;
         case 'matching':
-          This.corregirMatching(respuestaCompleta, function(respuestaCompleta, Puntos){ This.almacenaRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+          This.corregirMatching(respuestaCompleta, function(respuestaCompleta, Puntos){ This.almacenaRespuesta(res, respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
           break;
         case 'multichoice':
-          This.corregirMultichoice(respuestaCompleta, function(respuestaCompleta, Puntos){ This.almacenaRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+          This.corregirMultichoice(function(respuestaCompleta, Puntos){ This.almacenaRespuesta(res,respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
           break;
         case 'numerical':
-          This.corregirNumerical(respuestaCompleta, function(respuestaCompleta, Puntos){ This.almacenaRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+          This.corregirNumerical(function(respuestaCompleta, Puntos){ This.almacenaRespuesta(res, respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
           break;
         case 'truefalse':
-          This.corregirTruefalse(respuestaCompleta, function(respuestaCompleta, Puntos){ This.almacenaRespuesta(respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
+          This.corregirTruefalse(function(respuestaCompleta, Puntos){ This.almacenaRespuesta(res, respuestaCompleta, Puntos, function(Puntos) { cb(Puntos); }); });
           break;
         default:
           break;
@@ -151,5 +150,24 @@ module.exports = {
 
                 cb(puntuacion, texto);
             });
-        }
+        },
+    almacenaRespuesta: function(res, respuestaCompleta, Puntos, cb) {
+    
+    Alumno.findOne({
+          where: {user: respuestaCompleta.usuario}
+        }).then(function(alumno){
+          if(alumno){
+
+      Respuesta.create({valor: respuestaCompleta.answered, cuestionario: respuestaCompleta.cuestionario, pregunta: respuestaCompleta.pregunta, puntuacion: Puntos,
+         alumno: alumno.id }).exec(function createCB(err, created){
+          res.send(created);
+
+        });
+    }else{
+      res.send("No estas auntenticado como alumno");
+    }
+    });
+    
+  }
+}
 };
